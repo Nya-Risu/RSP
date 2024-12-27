@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Logging Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1,
+        h2 {
+            color: #007BFF;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result,
+        #logs {
+            margin-top: 20px;
+            background: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #logs {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Test Flask Logging</h1>
+        <button onclick="sendRequest('/log')">Test Logging</button>
+        <button onclick="sendRequest('/http-log')">Test HTTP Log</button>
+        <button onclick="sendRequest('/execution-time')">Test Execution Time</button>
+        <button onclick="sendRequest('/clear-logs')">Clear Logs</button>
+        <div id="result"></div>
+        <div style="margin-top: 20px;">
+            <h2>Application Logs</h2>
+            <button onclick="loadLogs()">Load Logs</button>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        async function sendRequest(endpoint) {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.text();
+                document.getElementById('result').innerText = `Response: ${data}`;
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function loadLogs() {
+            try {
+                const response = await fetch(`/logs?nocache=${new Date().getTime()}`);
+                const logs = await response.text();
+                document.getElementById('logs').innerHTML = logs.replace(/\n/g, '<br>');
+            } catch (error) {
+                document.getElementById('logs').innerText = `Error loading logs: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

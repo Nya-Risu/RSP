@@ -1,0 +1,8 @@
+2024-12-27 13:49:38,706 - INFO - Log file has been cleared.
+2024-12-27 13:49:39,603 - DEBUG - This is a DEBUG message
+2024-12-27 13:49:39,603 - INFO - This is an INFO message
+2024-12-27 13:49:39,603 - WARNING - This is a WARN message
+2024-12-27 13:49:39,604 - ERROR - This is an ERROR message
+2024-12-27 13:49:40,133 - INFO - HTTP Request: GET http://127.0.0.1:5000/http-log
+2024-12-27 13:49:40,134 - INFO - HTTP Response: HTTP request and response logged!
+2024-12-27 13:49:41,657 - INFO - execution_time_example executed in 1.00s
